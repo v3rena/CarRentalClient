@@ -20,9 +20,19 @@ namespace CarRentalClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+		MainWindowViewModel MWVM;
+
 		public MainWindow()
 		{
 			InitializeComponent();
+			MWVM = new MainWindowViewModel();
+			DataContext = MWVM;
+		}
+		private void OnSelect(object sender, SelectionChangedEventArgs args)
+		{
+			DataGrid grid = (DataGrid)sender;
+			Models.Car item = (Models.Car)grid.SelectedItem;
+			MWVM.CurrentCar = item;
 		}
 	}
 }
