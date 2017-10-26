@@ -8,7 +8,7 @@
         Title="MainWindow" Height="730" Width="1050">
     <Grid>
 		<StackPanel>
-			<DataGrid Name="CarGrid" SelectionChanged="OnSelect" SelectionMode="Single" ItemsSource="{Binding Path=Cars}" FontSize="18"/>
+			<DataGrid Name="CarGrid" SelectionChanged="OnSelectCar" SelectionMode="Single" ItemsSource="{Binding Path=Cars}" FontSize="18"/>
 			<Button Command="{Binding BookCar}" Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
 				Book
 			</Button>
@@ -16,13 +16,13 @@
 				Return
 			</Button>
 			<Label>ID</Label>
-			<TextBox Text="{Binding CurrentCar.Customer.ID}" Height="30" FontSize="18"></TextBox>
+			<TextBlock Text="{Binding CurrentCar.Customer.ID}" Height="30" FontSize="14"></TextBlock>
 			<Label>First Name</Label>
-			<TextBox Text="{Binding CurrentCar.Customer.FirstName}" Height="30" FontSize="18"></TextBox>
+			<TextBlock Text="{Binding CurrentCar.Customer.FirstName}" Height="30" FontSize="14"></TextBlock>
 			<Label>Last Name</Label>
-			<TextBox Text="{Binding CurrentCar.Customer.LastName}" Height="30" FontSize="18"></TextBox>
+			<TextBlock Text="{Binding CurrentCar.Customer.LastName}" Height="30" FontSize="14"></TextBlock>
 
-			<ComboBox ItemsSource="{Binding Path=Customers}"
+			<ComboBox ItemsSource="{Binding Path=Customers}" Name="CustomerList" SelectionChanged="OnSelectCustomer"
                   SelectedValue="{Binding CurrentCar.Customer, UpdateSourceTrigger=PropertyChanged}">
 				<ComboBox.ItemTemplate>
 					<DataTemplate>

@@ -63,11 +63,6 @@ namespace CarRentalClient.Models
 		public bool Update(Car car)
 		{
 			HttpClient client = Connect();
-			//case return
-			car.IsAvailable = true;
-			car.TimeShouldReturn = null;
-			car.CustomerID = null;
-			car.Customer = null;
 
 			HttpResponseMessage response = client.PutAsJsonAsync("api/Car/" + car.ID, car).Result;
 			response.EnsureSuccessStatusCode();

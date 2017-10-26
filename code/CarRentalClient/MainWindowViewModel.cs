@@ -20,6 +20,7 @@ namespace CarRentalClient
 			Customers = (List<Customer>)customerRepo.GetAll();
 
 			CurrentCar = Cars.FirstOrDefault();
+			CurrentCustomer = Customers.FirstOrDefault();
 			CurrentCar.Change += CurrentCarChanged;
 		}
 
@@ -50,6 +51,20 @@ namespace CarRentalClient
 			}
 		}
 
+		private Customer _currentCustomer;
+		public Customer CurrentCustomer
+		{
+			get { return _currentCustomer; }
+			set
+			{
+				_currentCustomer = value;
+
+				if (Equals(_currentCustomer, value)) return;
+				_currentCustomer = value as Customer;
+				OnPropertyChanged("CurrentCustomer");
+			}
+		}
+
 		private void CurrentCarChanged(object sender, EventArgs e)
 		{
 			OnPropertyChanged("CurrentCar");
@@ -60,6 +75,10 @@ namespace CarRentalClient
 		{
 			get
 			{
+				CurrentCar.Customer = CurrentCustomer;
+				CurrentCar.CustomerID = CurrentCustomer.ID;
+				CurrentCar.IsAvailable = false;
+				CurrentCar.TimeShouldReturn = DateTime.Now;
 				return _bookCar ?? (_bookCar = new SimpleCommand(
 						   () => carRepo.Update(CurrentCar),
 						   () => true));
@@ -71,6 +90,10 @@ namespace CarRentalClient
 		{
 			get
 			{
+				CurrentCar.Customer = null;
+				CurrentCar.CustomerID = null;
+				CurrentCar.IsAvailable = true;
+				CurrentCar.TimeShouldReturn = null;
 				return _returnCar ?? (_returnCar = new SimpleCommand(
 						   () => carRepo.Update(CurrentCar),
 						   () => true));

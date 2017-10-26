@@ -28,11 +28,18 @@ namespace CarRentalClient
 			MWVM = new MainWindowViewModel();
 			DataContext = MWVM;
 		}
-		private void OnSelect(object sender, SelectionChangedEventArgs args)
+		private void OnSelectCar(object sender, SelectionChangedEventArgs args)
 		{
 			DataGrid grid = (DataGrid)sender;
-			Models.Car item = (Models.Car)grid.SelectedItem;
-			MWVM.CurrentCar = item;
+			Models.Car currCar = (Models.Car)grid.SelectedItem;
+			MWVM.CurrentCar = currCar;
+		}
+
+		private void OnSelectCustomer(object sender, SelectionChangedEventArgs args)
+		{
+			ComboBox box = (ComboBox)sender;
+			Models.Customer currCus = (Models.Customer)box.SelectedItem;
+			MWVM.CurrentCustomer = currCus;
 		}
 	}
 }
