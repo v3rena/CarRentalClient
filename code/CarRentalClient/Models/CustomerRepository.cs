@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
+using System.Windows;
 
 namespace CarRentalClient.Models
 {
@@ -13,9 +14,9 @@ namespace CarRentalClient.Models
 		{
 			HttpClient client = new HttpClient
 			{
-				//BaseAddress = new Uri("http://carrentalservice2017.azurewebsites.net/")
-				BaseAddress = new Uri("http://localhost:51147/")
-
+				BaseAddress = new Uri("http://carrentalservice2017.azurewebsites.net/")
+				//Address for local testing
+				//BaseAddress = new Uri("http://localhost:51147/")
 			};
 			client.DefaultRequestHeaders.Accept.Clear();
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -34,9 +35,7 @@ namespace CarRentalClient.Models
 			}
 			else
 			{
-				//MessageBox.Show("Error Code" +
-				//response.StatusCode + " : Message - " + response.ReasonPhrase);
-				//throw new ArgumentNullException();
+				MessageBox.Show("Error Code" + response.StatusCode + " : Message - " + response.ReasonPhrase);
 			}
 			return customers;
 		}
