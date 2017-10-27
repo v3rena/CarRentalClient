@@ -10,18 +10,31 @@ namespace CarRentalClient
 {
 	public class MainWindowViewModel : ViewModel
 	{
-		static readonly ICarRepository carRepo = new CarRepository();
-		static readonly ICustomerRepository customerRepo = new CustomerRepository();
-
+		private readonly ICarRepository carRepo = new CarRepository();
+		private readonly ICustomerRepository customerRepo = new CustomerRepository();
 
 		public MainWindowViewModel()
 		{
 			Cars = (List<Car>)carRepo.GetAll();
 			Customers = (List<Customer>)customerRepo.GetAll();
+			ReturnDate = DateTime.Now;
 
-			CurrentCar = Cars.FirstOrDefault();
+			//CurrentCar = Cars.FirstOrDefault();
 			CurrentCustomer = Customers.FirstOrDefault();
-			CurrentCar.Change += CurrentCarChanged;
+			//CurrentCar.Change += CurrentCarChanged;
+		}
+
+		public void Update(Car car)
+		{
+			carRepo.Update(car);
+		}
+		public IEnumerable<Car> GetAllCars()
+		{
+			return carRepo.GetAll();
+		}
+		public IEnumerable<Customer> GetAllCustomers()
+		{
+			return customerRepo.GetAll();
 		}
 
 		private IList<Car> _cars;
@@ -29,6 +42,13 @@ namespace CarRentalClient
 		{
 			get { return _cars; }
 			set { _cars = value; }
+		}
+
+		private DateTime _returnDate;
+		public DateTime ReturnDate
+		{
+			get { return _returnDate; }
+			set { _returnDate = value; }
 		}
 
 		private IList<Customer> _customers;
@@ -65,39 +85,9 @@ namespace CarRentalClient
 			}
 		}
 
-		private void CurrentCarChanged(object sender, EventArgs e)
+		public void CurrentCarChanged(object sender, EventArgs e)
 		{
 			OnPropertyChanged("CurrentCar");
-		}
-
-		private ICommand _bookCar;
-		public ICommand BookCar
-		{
-			get
-			{
-				CurrentCar.Customer = CurrentCustomer;
-				CurrentCar.CustomerID = CurrentCustomer.ID;
-				CurrentCar.IsAvailable = false;
-				CurrentCar.TimeShouldReturn = DateTime.Now;
-				return _bookCar ?? (_bookCar = new SimpleCommand(
-						   () => carRepo.Update(CurrentCar),
-						   () => true));
-			}
-		}
-
-		private ICommand _returnCar;
-		public ICommand ReturnCar
-		{
-			get
-			{
-				CurrentCar.Customer = null;
-				CurrentCar.CustomerID = null;
-				CurrentCar.IsAvailable = true;
-				CurrentCar.TimeShouldReturn = null;
-				return _returnCar ?? (_returnCar = new SimpleCommand(
-						   () => carRepo.Update(CurrentCar),
-						   () => true));
-			}
 		}
 
 		public event EventHandler Change;

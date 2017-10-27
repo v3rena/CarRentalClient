@@ -8,22 +8,15 @@
         Title="MainWindow" Height="730" Width="1050">
     <Grid>
 		<StackPanel>
-			<DataGrid Name="CarGrid" SelectionChanged="OnSelectCar" SelectionMode="Single" ItemsSource="{Binding Path=Cars}" FontSize="18"/>
-			<Button Command="{Binding BookCar}" Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
-				Book
-			</Button>
-			<Button Command="{Binding ReturnCar}" Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
+
+			<DataGrid Name="CarGrid" SelectionChanged="OnSelectCar" SelectionMode="Single" ItemsSource="{Binding Path=Cars, UpdateSourceTrigger=PropertyChanged}" FontSize="18" />
+
+			<Button Click="ReturnACar" Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
 				Return
 			</Button>
-			<Label>ID</Label>
-			<TextBlock Text="{Binding CurrentCar.Customer.ID}" Height="30" FontSize="14"></TextBlock>
-			<Label>First Name</Label>
-			<TextBlock Text="{Binding CurrentCar.Customer.FirstName}" Height="30" FontSize="14"></TextBlock>
-			<Label>Last Name</Label>
-			<TextBlock Text="{Binding CurrentCar.Customer.LastName}" Height="30" FontSize="14"></TextBlock>
-
+			<TextBlock Text="Choose a customer and a return date" Height="30" FontSize="18"></TextBlock>
 			<ComboBox ItemsSource="{Binding Path=Customers}" Name="CustomerList" SelectionChanged="OnSelectCustomer"
-                  SelectedValue="{Binding CurrentCar.Customer, UpdateSourceTrigger=PropertyChanged}">
+                  SelectedValue="{Binding CurrentCustomer, UpdateSourceTrigger=PropertyChanged}" Height="30" MinWidth="300" HorizontalAlignment="Left" FontSize="18">
 				<ComboBox.ItemTemplate>
 					<DataTemplate>
 						<TextBlock>
@@ -37,6 +30,10 @@
 					</DataTemplate>
 				</ComboBox.ItemTemplate>
 			</ComboBox>
+			<DatePicker DisplayDate="{Binding Path=ReturnDate}" SelectedDateChanged="OnSelectDate" MinWidth="300" HorizontalAlignment="Left"></DatePicker>
+			<Button Click="BookACar"  Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
+				Book
+			</Button>
 		</StackPanel>
 	</Grid>
 </Window>

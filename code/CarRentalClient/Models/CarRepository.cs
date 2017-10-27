@@ -69,7 +69,8 @@ namespace CarRentalClient.Models
 
 			if (response.IsSuccessStatusCode)
 			{
-				GetAll();
+				//GetAll();
+				//MessageBox.Show("Success ");
 				return true;
 			}
 			else

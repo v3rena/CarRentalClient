@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarRentalClient.Models
 {
-	interface ICustomerRepository
+	public interface ICustomerRepository
 	{
 		IEnumerable<Customer> GetAll();
 	}
