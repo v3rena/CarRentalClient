@@ -15,7 +15,9 @@ namespace CarRentalClient.Models
 		{
 			HttpClient client = new HttpClient
 			{
+				//BaseAddress = new Uri("http://carrentalservice2017.azurewebsites.net/")
 				BaseAddress = new Uri("http://localhost:51147/")
+
 			};
 			client.DefaultRequestHeaders.Accept.Clear();
 			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
