@@ -20,45 +20,45 @@ namespace CarRentalClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		MainWindowViewModel MWVM;
+		MainWindowViewModel ViewModel;
 
 		public MainWindow()
 		{
 			InitializeComponent();
-			MWVM = new MainWindowViewModel();
-			DataContext = MWVM;
-			CarGrid.ItemsSource = MWVM.Cars;
+			ViewModel = new MainWindowViewModel();
+			DataContext = ViewModel;
+			CarGrid.ItemsSource = ViewModel.Cars;
 		}
 
 		private void OnSelectCar(object sender, SelectionChangedEventArgs args)
 		{
 			DataGrid grid = (DataGrid)sender;
-			MWVM.CurrentCar = (Models.Car)grid.SelectedItem;
+			ViewModel.CurrentCar = (Models.Car)grid.SelectedItem;
 		}
 
 		private void OnSelectCustomer(object sender, SelectionChangedEventArgs args)
 		{
 			ComboBox box = (ComboBox)sender;
-			MWVM.CurrentCustomer = (Models.Customer)box.SelectedItem;
+			ViewModel.CurrentCustomer = (Models.Customer)box.SelectedItem;
 		}
 
 		private void OnSelectDate(object sender, SelectionChangedEventArgs args)
 		{
 			DatePicker box = (DatePicker)sender;
-			MWVM.ReturnDate = (DateTime)box.SelectedDate;
+			ViewModel.ReturnDate = (DateTime)box.SelectedDate;
 		}
 
 		private void Refresh()
 		{
-			MWVM.Cars=(List<Models.Car>)MWVM.GetAllCars();
-			MWVM.Customers = (List<Models.Customer>)MWVM.GetAllCustomers();
-			CarGrid.ItemsSource = MWVM.Cars;
-			CustomerList.ItemsSource = MWVM.Customers;
+			ViewModel.Cars=(List<Models.Car>)ViewModel.GetAllCars();
+			ViewModel.Customers = (List<Models.Customer>)ViewModel.GetAllCustomers();
+			CarGrid.ItemsSource = ViewModel.Cars;
+			CustomerList.ItemsSource = ViewModel.Customers;
 		}
 
-		private void ReturnACar(object sender, RoutedEventArgs e)
+		private void ReturnCar(object sender, RoutedEventArgs e)
 		{
-			var car = MWVM.CurrentCar;
+			var car = ViewModel.CurrentCar;
 			if (car==null)
 			{
 				MessageBox.Show("Please select a car");
@@ -69,14 +69,14 @@ namespace CarRentalClient
 				car.CustomerID = null;
 				car.IsAvailable = true;
 				car.TimeShouldReturn = null;
-				MWVM.Update(car);
+				ViewModel.Update(car);
 			}
 			Refresh();
 		}
 
-		private void BookACar(object sender, RoutedEventArgs e)
+		private void BookCar(object sender, RoutedEventArgs e)
 		{
-			var car = MWVM.CurrentCar;
+			var car = ViewModel.CurrentCar;
 			if (car==null)
 			{
 				MessageBox.Show("Please select a car");
@@ -89,7 +89,7 @@ namespace CarRentalClient
 				}
 				else
 				{
-					var customer = MWVM.CurrentCustomer;
+					var customer = ViewModel.CurrentCustomer;
 					if (customer == null)
 					{
 						MessageBox.Show("Please select a customer");
@@ -99,8 +99,8 @@ namespace CarRentalClient
 						car.Customer = customer;
 						car.CustomerID = customer.ID;
 						car.IsAvailable = false;
-						car.TimeShouldReturn = MWVM.ReturnDate;
-						MWVM.Update(car);
+						car.TimeShouldReturn = ViewModel.ReturnDate;
+						ViewModel.Update(car);
 					}
 				}
 			}

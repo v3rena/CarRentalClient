@@ -11,7 +11,7 @@
 
 			<DataGrid Name="CarGrid" SelectionChanged="OnSelectCar" SelectionMode="Single" ItemsSource="{Binding Path=Cars, UpdateSourceTrigger=PropertyChanged}" FontSize="18" />
 
-			<Button Click="ReturnACar" Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
+			<Button Click="ReturnCar" Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
 				Return
 			</Button>
 			<TextBlock Text="Choose a customer and a return date" Height="30" FontSize="18"></TextBlock>
@@ -31,7 +31,7 @@
 				</ComboBox.ItemTemplate>
 			</ComboBox>
 			<DatePicker DisplayDate="{Binding Path=ReturnDate}" SelectedDateChanged="OnSelectDate" MinWidth="300" HorizontalAlignment="Left"></DatePicker>
-			<Button Click="BookACar"  Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
+			<Button Click="BookCar"  Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
 				Book
 			</Button>
 		</StackPanel>

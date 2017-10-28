@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRentalClient.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CarRentalClient.Models
+namespace CarRentalClient.Repository
 {
 	public class CarRepository : ICarRepository
 	{

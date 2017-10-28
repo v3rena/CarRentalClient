@@ -15,13 +15,5 @@ namespace CarRentalClient.Models
 		public bool IsAvailable { get; set; }
 		public int? CustomerID { get; set; }
 		public virtual Customer Customer { get; set; }
-
-		public event EventHandler Change;
-
-		protected void OnChange()
-		{
-			var temp = Change;
-			temp?.Invoke(this, EventArgs.Empty);
-		}
 	}
 }

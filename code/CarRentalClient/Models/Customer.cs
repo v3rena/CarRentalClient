@@ -8,12 +8,14 @@ namespace CarRentalClient.Models
 {
 	public class Customer
 	{
-		public  Customer(int ID, string name, string lastname)
+		public  Customer(int ID, string FirstName, string LastName)
 		{
 			this.ID = ID;
-			this.FirstName = name;
-			this.LastName = lastname;
+			this.FirstName = FirstName;
+			this.LastName = LastName;
 		}
+		public Customer() { }
+
 		public int ID { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }

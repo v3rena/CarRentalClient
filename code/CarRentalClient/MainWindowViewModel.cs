@@ -1,4 +1,5 @@
 ﻿using CarRentalClient.Models;
+using CarRentalClient.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Windows.Input;
 
 namespace CarRentalClient
 {
-	public class MainWindowViewModel : ViewModel
+	public class MainWindowViewModel
 	{
 		private readonly ICarRepository carRepo = new CarRepository();
 		private readonly ICustomerRepository customerRepo = new CustomerRepository();
@@ -18,20 +19,19 @@ namespace CarRentalClient
 			Cars = (List<Car>)carRepo.GetAll();
 			Customers = (List<Customer>)customerRepo.GetAll();
 			ReturnDate = DateTime.Now;
-
-			//CurrentCar = Cars.FirstOrDefault();
 			CurrentCustomer = Customers.FirstOrDefault();
-			//CurrentCar.Change += CurrentCarChanged;
 		}
 
 		public void Update(Car car)
 		{
 			carRepo.Update(car);
 		}
+
 		public IEnumerable<Car> GetAllCars()
 		{
 			return carRepo.GetAll();
 		}
+
 		public IEnumerable<Customer> GetAllCustomers()
 		{
 			return customerRepo.GetAll();
@@ -67,7 +67,6 @@ namespace CarRentalClient
 
 				if (Equals(_currentCar, value)) return;
 				_currentCar = value as Car;
-				OnPropertyChanged("CurrentCar");
 			}
 		}
 
@@ -81,21 +80,7 @@ namespace CarRentalClient
 
 				if (Equals(_currentCustomer, value)) return;
 				_currentCustomer = value as Customer;
-				OnPropertyChanged("CurrentCustomer");
 			}
-		}
-
-		public void CurrentCarChanged(object sender, EventArgs e)
-		{
-			OnPropertyChanged("CurrentCar");
-		}
-
-		public event EventHandler Change;
-
-		protected void OnChange()
-		{
-			var temp = Change;
-			temp?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

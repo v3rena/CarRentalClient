@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CarRentalClient.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarRentalClient.Models
+namespace CarRentalClient.Repository
 {
 	public interface ICustomerRepository
 	{
