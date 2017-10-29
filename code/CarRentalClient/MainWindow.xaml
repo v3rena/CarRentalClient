@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarRentalClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="730" Width="1050">
+        Title="MainWindow" Height="600" Width="900">
     <Grid>
 		<StackPanel>
-
-			<DataGrid Name="CarGrid" AutoGenerateColumns="False" SelectionChanged="OnSelectCar" SelectionMode="Single" ItemsSource="{Binding Path=Cars, UpdateSourceTrigger=PropertyChanged}" FontSize="18">
+			<DataGrid Margin="2" Name="CarGrid" AutoGenerateColumns="False" SelectionChanged="OnSelectCar" SelectionMode="Single" ItemsSource="{Binding Path=Cars, UpdateSourceTrigger=PropertyChanged}" FontSize="18">
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Car ID" Binding="{Binding ID}" />
 					<DataGridTextColumn Header="Model" Binding="{Binding Model}" />
@@ -21,24 +20,20 @@
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
 								<DockPanel>
-								<TextBlock Text="{Binding Customer.FirstName}"/>
+									<TextBlock Text="{Binding Customer.FirstName}"/>
 									<TextBlock Text=" "/>
 									<TextBlock Text="{Binding Customer.LastName}"/>
 								</DockPanel>
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>
-
-
 				</DataGrid.Columns>
 			</DataGrid>
-
-
 			<Button Click="ReturnCar" Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
 				Return
 			</Button>
-			<TextBlock Text="Choose a customer and a return date" Height="30" FontSize="18"></TextBlock>
-			<ComboBox ItemsSource="{Binding Path=Customers}" Name="CustomerList" SelectionChanged="OnSelectCustomer"
+			<TextBlock Margin="2" Text="Choose a customer and a return date" Height="30" FontSize="18"></TextBlock>
+			<ComboBox Margin="2" ItemsSource="{Binding Path=Customers}" Name="CustomerList" SelectionChanged="OnSelectCustomer"
                   SelectedValue="{Binding CurrentCustomer, UpdateSourceTrigger=PropertyChanged}" Height="30" MinWidth="300" HorizontalAlignment="Left" FontSize="18">
 				<ComboBox.ItemTemplate>
 					<DataTemplate>
@@ -53,8 +48,8 @@
 					</DataTemplate>
 				</ComboBox.ItemTemplate>
 			</ComboBox>
-			<DatePicker DisplayDate="{Binding Path=ReturnDate}" SelectedDateChanged="OnSelectDate" MinWidth="300" HorizontalAlignment="Left"></DatePicker>
-			<Button Click="BookCar"  Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
+			<DatePicker Margin="2" DisplayDate="{Binding Path=ReturnDate}" SelectedDateChanged="OnSelectDate" MinWidth="300" HorizontalAlignment="Left"></DatePicker>
+			<Button Click="BookCar"  Width="70" Height="30" Margin="2" HorizontalAlignment="Left" FontSize="18">
 				Book
 			</Button>
 		</StackPanel>
