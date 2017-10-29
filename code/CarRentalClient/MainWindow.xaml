@@ -9,7 +9,30 @@
     <Grid>
 		<StackPanel>
 
-			<DataGrid Name="CarGrid" SelectionChanged="OnSelectCar" SelectionMode="Single" ItemsSource="{Binding Path=Cars, UpdateSourceTrigger=PropertyChanged}" FontSize="18" />
+			<DataGrid Name="CarGrid" AutoGenerateColumns="False" SelectionChanged="OnSelectCar" SelectionMode="Single" ItemsSource="{Binding Path=Cars, UpdateSourceTrigger=PropertyChanged}" FontSize="18">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="Car ID" Binding="{Binding ID}" />
+					<DataGridTextColumn Header="Model" Binding="{Binding Model}" />
+					<DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+					<DataGridCheckBoxColumn Header="Available" Binding="{Binding IsAvailable}"/>
+					<DataGridTextColumn Header="Return Date" Binding="{Binding TimeShouldReturn, StringFormat=\{0:dd.MM.yy\}}" />
+					<DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerID}" />
+					<DataGridTemplateColumn Header="Customer">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<DockPanel>
+								<TextBlock Text="{Binding Customer.FirstName}"/>
+									<TextBlock Text=" "/>
+									<TextBlock Text="{Binding Customer.LastName}"/>
+								</DockPanel>
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+
+
+				</DataGrid.Columns>
+			</DataGrid>
+
 
 			<Button Click="ReturnCar" Width="70" Height="30" Margin="5" HorizontalAlignment="Left" FontSize="18">
 				Return

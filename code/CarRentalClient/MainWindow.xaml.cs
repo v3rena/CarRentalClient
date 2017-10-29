@@ -33,7 +33,14 @@ namespace CarRentalClient
 		private void OnSelectCar(object sender, SelectionChangedEventArgs args)
 		{
 			DataGrid grid = (DataGrid)sender;
-			ViewModel.CurrentCar = (Models.Car)grid.SelectedItem;
+			try
+			{
+				ViewModel.CurrentCar = (Models.Car)grid.SelectedItem;
+			}
+			catch
+			{
+				new System.InvalidCastException("Selected item is not a car");
+			}
 		}
 
 		private void OnSelectCustomer(object sender, SelectionChangedEventArgs args)
